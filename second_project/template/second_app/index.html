@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Second App</title>
+  </head>
+  <body>
+    {% if user %}
+      <ul>
+        {% for data in user %}
+          <li>{{ data.first_name }}</li>
+          <li>{{ data.last_name }}</li>
+          <li>{{ data.email }}</li>
+        {% endfor %}
+      {% else %}
+        <li>No data!</li>
+      </ul>
+    {% endif %}
+
+  </body>
+</html>

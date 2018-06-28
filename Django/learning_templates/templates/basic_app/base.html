@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="">
+      <ul>
+
+        <li><a href="{% url 'index'%}">Home</a></li>
+        <li><a href="{% url 'basic_app:others'%}">Other</a></li>
+        <li><a href="{% url 'basic_app:relative'%}">Relative</a></li>
+      </ul>
+
+    </div>
+    <div class="">
+      {% block body_block %}
+
+      {% endblock %}
+
+    </div>
+
+  </body>
+</html>

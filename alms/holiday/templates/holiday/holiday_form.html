@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+{% if user.is_superuser %}
+   <h1>Your request has been submitted</h1>
+   <form method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+     {% bootstrap_form form %}
+     <input type="submit" value="Submit">
+
+   </form>
+{% else %}
+  <h1>Sorry! you don't have access</h1>
+{% endif %}
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+$( document ).ready(function() {
+  // var holiday_date = $('#id_holiday_date').val();
+
+  // $('#id_holiday_date').val(convertDate(holiday_date))
+  // function convertDate(inputFormat) {
+  //   function pad(s) { return (s < 10) ? '0' + s : s; }
+  //   var d = new Date(inputFormat);
+  //   return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
+  //   }
+});
+</script>
+{% endblock %}

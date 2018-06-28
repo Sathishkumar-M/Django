@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+  <h1>Holiday List</h1>
+  <div class="">
+    <a href="{% url 'holiday:create'%}">Add Holiday</a>
+  </div>
+
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Holiday</th>
+        <th scope="col">Holiday type</th>
+        {% if user.is_superuser %}
+          <th scope="col">Action</th>
+        {% endif %}
+      </tr>
+    </thead>
+  {% for holiday in holiday_list %}
+    <tr>
+    {% include 'holiday/_holiday_list.html' %}
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+
+<div class="">
+  <form class="" id="sample" action="/holiday/list_by_year/" method="POST">
+    {% csrf_token %}
+    <p>{{year}}</p>
+    <select class="" name="year" onchange="myFunction()">
+      {% for list in year_list %}
+        {% if year == list.year %}
+          <option value="{{list.year}}" selected>{{year}}</option>
+        {% else %}
+          <option value="{{list.year}}">{{list.year}}</option>
+        {% endif %}
+
+      {% endfor %}
+    </select>
+  </form>
+
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+  function myFunction() {
+      $("#sample").submit();
+  }
+</script>
+{% endblock %}

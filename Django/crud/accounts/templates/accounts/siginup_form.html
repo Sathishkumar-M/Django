@@ -1,0 +1,23 @@
+{% extends 'accounts/accounts_base.html' %}
+
+{% block preaccount %}
+{% if registered %}
+   <h1>Your request has been submitted</h1>
+{% else %}
+<h1>
+For signup
+</h1>
+{% endif %}
+
+{% endblock %}
+
+{% block account_content %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {{ form2.as_p }}
+    <input type="submit" value="Submit">
+
+  </form>
+{% endblock %}

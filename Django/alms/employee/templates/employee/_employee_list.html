@@ -1,0 +1,14 @@
+<div class="">
+  <div class="">
+    <strong>{{employee.user.first_name}}</strong>
+    <strong>{{employee.user.is_active}}</strong>
+    <strong>{{employee.address}}</strong>
+
+    <div class="">
+      {% if user.is_authenticated %}
+        <a href="{% url 'employee:update' pk=employee.user.pk %}"> Edit</a>
+        <a href="{% url 'employee:delete' pk=employee.user.pk %}">delete</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

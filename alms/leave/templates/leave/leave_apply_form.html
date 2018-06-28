@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+{% if user.is_superuser %}
+   <form method="post">
+     {% csrf_token %}
+     {% bootstrap_form form %}
+     <p class="count"></p>
+     <input type="submit" value="Submit">
+     <input type="submit" name="save" value="Save">
+   </form>
+{% else %}
+  <h1>Sorry! you don't have access</h1>
+{% endif %}
+
+{% endblock %}
+{% block javascript %}
+<script>
+
+$(document).ready(function() {
+  var hday='';
+  var holiday = [];
+              $.ajax({
+                url: '/holiday/ajax/list/',
+                type: 'POST',
+                data: {
+                },
+                // async:false,
+                dataType: 'json',
+                success: function (data) {
+                  if (data == 0) {
+                      console.log('Try different country name');
+                    } else {
+                        $.each(data.list, function (i, item) {
+                              var str_array = item.holiday_date.split('-');
+
+                              var dat = str_array[1]+'/'+str_array[2]+'/'+str_array[0];
+                              var dt = new Date(dat);
+                              hday += dt+',';
+                              holiday.push(item);
+                            });
+                        }
+                }
+              });
+// set default dates
+var start = new Date();
+// // set end date to max one year period:
+var end = new Date(new Date().setYear(start.getFullYear()+1));
+
+    $("#id_start_date").datepicker({
+      minDate:start,
+      maxDate:end,
+      dateFormat: 'dd/mm/yy',
+      beforeShowDay: function(date) {
+        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+
+        if (contains(holiday,string)) {
+          // debugger;
+          return [false, '']
+        } else {
+          var day = date.getDay();
+          return [(day != 0 && day != 6), ''];
+        }
+        },
+        onSelect: function (selected) {
+            var str_array = selected.split('/');
+            var dat = str_array[1]+'/'+str_array[0]+'/'+str_array[2];
+            var dt = new Date(dat);
+            dt.setDate(dt.getDate() + 1);
+            $("#id_end_date").datepicker("option", "minDate", dt);
+            $(".count").text(1);
+            $(".no_of_days").val(1);
+        }
+    });
+    $("#id_end_date").datepicker({
+      maxDate:end,
+      dateFormat: 'dd/mm/yy',
+      beforeShowDay: function(date) {
+        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+
+        if (contains(holiday,string)) {
+          // debugger;
+          return [false, '']
+        } else {
+          var day = date.getDay();
+          return [(day != 0 && day != 6), ''];
+        }
+        },
+        onSelect: function (selected) {
+            var str_array = selected.split('/');
+            var dat = str_array[1]+'/'+str_array[0]+'/'+str_array[2];
+            var dt = new Date(dat);
+            dt.setDate(dt.getDate() - 1);
+            $("#id_start_date").datepicker("option", "maxDate", dt);
+            calcBusinessDays();
+        }
+    });
+
+    function contains(a, obj) {
+      var i = Object.keys(a).length;
+      while (i--) {
+       if (a[i]['holiday_date'] === obj) {
+           return true;
+       }
+    }
+    return false;
+}
+
+function calcBusinessDays() { // input given as Date objects
+  var d1 = $("#id_start_date").val();
+  var d2 = $("#id_end_date").val();
+  var str_array = d1.split('/');
+  var dDate1 = new Date(str_array[1]+'/'+str_array[0]+'/'+str_array[2]);
+  var str_array = d2.split('/');
+  var dDate2 = new Date(str_array[1]+'/'+str_array[0]+'/'+str_array[2]);
+  var oneDay = 24*60*60*1000;
+  daysDiff = parseInt((dDate2.getTime()-dDate1.getTime())/oneDay,10)+1;
+
+  if (daysDiff>0) {
+  for (var i = dDate1.getTime(), lst = dDate2.getTime(); i <= lst; i += oneDay) {
+    var d = new Date(i);
+    if (d.getDay() == 6 || d.getDay() == 0 || hday.indexOf(d) != -1) {
+        daysDiff--;
+    }
+  }
+}
+$(".count").text(daysDiff);
+$(".no_of_days").val(daysDiff);
+console.log(daysDiff);
+}
+
+});
+
+</script>
+
+<script>
+ $( function() {
+   var option = [];
+            $.ajax({
+              url: '/employee/ajax/list/',
+              type: 'POST',
+              data: {
+              },
+              // async:false,
+              dataType: 'json',
+              success: function (data) {
+                if (data == 0) {
+                    console.log('Try different country name');
+                  } else {
+                      $.each(data.list, function (i, item) {
+                            option.push(item.email);
+                          });
+                      }
+              }
+            });
+
+   function split( val ) {
+     return val.split( /,\s*/ );
+   }
+   function extractLast( term ) {
+     return split( term ).pop();
+   }
+
+   $( "#id_tag_to" )
+     // don't navigate away from the field on tab when selecting an item
+     .on( "keydown", function( event ) {
+       if ( event.keyCode === $.ui.keyCode.TAB &&
+           $( this ).autocomplete( "instance" ).menu.active ) {
+         event.preventDefault();
+       }
+     })
+     .autocomplete({
+       minLength: 0,
+       source: function( request, response ) {
+         // delegate back to autocomplete, but extract the last term
+         response( $.ui.autocomplete.filter(
+           option, extractLast( request.term ) ) );
+       },
+       focus: function() {
+         // prevent value inserted on focus
+         return false;
+       },
+       select: function( event, ui ) {
+         var terms = split( this.value );
+         // remove the current input
+         terms.pop();
+         // add the selected item
+         terms.push( ui.item.value );
+         // add placeholder to get the comma-and-space at the end
+         terms.push( "" );
+         this.value = terms.join( ", " );
+         return false;
+       }
+     });
+ } );
+ </script>
+{% endblock %}

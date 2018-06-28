@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>App Test</title>
+  </head>
+  <body>
+    <h1>Hi Sathish, this is from templates/AppTwo/index.html!</h1>
+    {% if accesusers %}
+
+        {% for user in accesusers%}
+          <ul>User info
+            <li>{{user.first_name}}</li>
+            <li>{{user.last_name}}</li>
+            <li>{{user.email}}</li>
+          </ul>
+        {% endfor %}
+    {% else %}
+      <li>No data!</li>
+    {% endif %}
+
+  </body>
+</html>

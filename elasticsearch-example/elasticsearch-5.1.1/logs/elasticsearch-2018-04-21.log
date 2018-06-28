@@ -1,0 +1,30 @@
+[2018-04-21T15:54:55,734][INFO ][o.e.n.Node               ] [] initializing ...
+[2018-04-21T15:54:56,105][INFO ][o.e.e.NodeEnvironment    ] [dO3k5mc] using [1] data paths, mounts [[/ (/dev/sda6)]], net usable_space [147.6gb], net total_space [273.2gb], spins? [possibly], types [ext4]
+[2018-04-21T15:54:56,106][INFO ][o.e.e.NodeEnvironment    ] [dO3k5mc] heap size [1.9gb], compressed ordinary object pointers [true]
+[2018-04-21T15:54:56,175][INFO ][o.e.n.Node               ] node name [dO3k5mc] derived from node ID [dO3k5mcjSMa9w08PICzrqA]; set [node.name] to override
+[2018-04-21T15:54:56,202][INFO ][o.e.n.Node               ] version[5.1.1], pid[12218], build[5395e21/2016-12-06T12:36:15.409Z], OS[Linux/4.4.0-119-generic/amd64], JVM[Oracle Corporation/Java HotSpot(TM) 64-Bit Server VM/1.8.0_171/25.171-b11]
+[2018-04-21T15:54:58,226][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [aggs-matrix-stats]
+[2018-04-21T15:54:58,227][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [ingest-common]
+[2018-04-21T15:54:58,227][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [lang-expression]
+[2018-04-21T15:54:58,227][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [lang-groovy]
+[2018-04-21T15:54:58,228][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [lang-mustache]
+[2018-04-21T15:54:58,228][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [lang-painless]
+[2018-04-21T15:54:58,228][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [percolator]
+[2018-04-21T15:54:58,229][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [reindex]
+[2018-04-21T15:54:58,229][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [transport-netty3]
+[2018-04-21T15:54:58,229][INFO ][o.e.p.PluginsService     ] [dO3k5mc] loaded module [transport-netty4]
+[2018-04-21T15:54:58,230][INFO ][o.e.p.PluginsService     ] [dO3k5mc] no plugins loaded
+[2018-04-21T15:55:03,097][INFO ][o.e.n.Node               ] initialized
+[2018-04-21T15:55:03,097][INFO ][o.e.n.Node               ] [dO3k5mc] starting ...
+[2018-04-21T15:55:03,403][INFO ][o.e.t.TransportService   ] [dO3k5mc] publish_address {127.0.0.1:9300}, bound_addresses {[::1]:9300}, {127.0.0.1:9300}
+[2018-04-21T15:55:03,411][WARN ][o.e.b.BootstrapCheck     ] [dO3k5mc] max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
+[2018-04-21T15:55:03,411][WARN ][o.e.b.BootstrapCheck     ] [dO3k5mc] max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+[2018-04-21T15:55:06,566][INFO ][o.e.c.s.ClusterService   ] [dO3k5mc] new_master {dO3k5mc}{dO3k5mcjSMa9w08PICzrqA}{fK155ZnwSx6wyQkacasnWg}{127.0.0.1}{127.0.0.1:9300}, reason: zen-disco-elected-as-master ([0] nodes joined)
+[2018-04-21T15:55:06,612][INFO ][o.e.h.HttpServer         ] [dO3k5mc] publish_address {127.0.0.1:9200}, bound_addresses {[::1]:9200}, {127.0.0.1:9200}
+[2018-04-21T15:55:06,613][INFO ][o.e.n.Node               ] [dO3k5mc] started
+[2018-04-21T15:55:07,040][INFO ][o.e.g.GatewayService     ] [dO3k5mc] recovered [1] indices into cluster_state
+[2018-04-21T15:55:08,132][INFO ][o.e.c.r.a.AllocationService] [dO3k5mc] Cluster health status changed from [RED] to [YELLOW] (reason: [shards started [[blogpost-index][3]] ...]).
+[2018-04-21T18:25:06,837][INFO ][o.e.n.Node               ] [dO3k5mc] stopping ...
+[2018-04-21T18:25:06,881][INFO ][o.e.n.Node               ] [dO3k5mc] stopped
+[2018-04-21T18:25:06,881][INFO ][o.e.n.Node               ] [dO3k5mc] closing ...
+[2018-04-21T18:25:06,898][INFO ][o.e.n.Node               ] [dO3k5mc] closed

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Elastic Search List</h1>
+  {% if blogpost_list %}
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Author</th>
+          <th scope="col">Title</th>
+          <th scope="col">Text</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for BlogPost in blogpost_list %}
+          <tr>
+            {% include 'elasticsearchapp/_elasticsearch_list.html' %}
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+{% else %}
+  <h3>No Results</h3>
+{% endif %}
+
+<div class="">
+  <form class="" id="sample" action="" method="POST">
+    {% csrf_token %}
+    <input type="text" name="author">
+<input type="submit" value="Submit">
+  </form>
+
+</div>
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hi,
+<br/>
+ {{ user.first_name }} applied leave from {{leave_details.start_date}} to {{leave_details.end_date}},
+<br/>
+Status: {{leave_details.status}} by {{leave_details.status_by}}
+<br/>
+<br/>
+ Thank You
+
+{% endautoescape %}

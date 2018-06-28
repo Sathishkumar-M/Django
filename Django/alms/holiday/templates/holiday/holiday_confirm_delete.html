@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+    <h1>Delete {{holiday.holiday_name}}</h1>
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" name="" value="Delete">
+      <a href="{% url 'holiday:list' %}">Cancel</a>
+
+    </form>
+{% endblock %}

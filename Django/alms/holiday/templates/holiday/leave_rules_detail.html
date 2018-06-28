@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="">
+  {% if user.is_superuser %}
+    <a href="{% url 'leave:update' pk=leaverules.pk %}"> Edit</a>
+  {% endif %}
+</div>
+
+<div class="">
+  <h1>{{leaverules.rules}}</h1>
+</div>
+{% endblock %}

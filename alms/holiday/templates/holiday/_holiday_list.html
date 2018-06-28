@@ -1,0 +1,8 @@
+
+    <td><strong>{{holiday.holiday_date}}</strong></td>
+    <td><strong>{{holiday.holiday_name}}</strong></td>
+    <td><strong>{{holiday.holiday_type}}</strong></td>
+      {% if user.is_superuser %}
+      <td><a href="{% url 'holiday:update' pk=holiday.pk %}"> Edit</a>
+        <a href="{% url 'holiday:delete' pk=holiday.pk %}">delete</a></td>
+      {% endif %}

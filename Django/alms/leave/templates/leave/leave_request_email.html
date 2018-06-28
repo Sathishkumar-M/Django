@@ -1,0 +1,22 @@
+{% autoescape off %}
+Hi,
+<br/>
+ {{ user.first_name }} applied from {{leave_details.start_date}} to {{leave_details.end_date}},
+<br/>
+ {{ user.first_name }} leave history:
+ Total number of days leave on this year(till date): {{ user_history|length }}
+
+ Other's leave applied on same date:
+ {% for other in other_history %}
+ {{other.username}}
+{{other.start_date}}
+{{other.end_date}}
+{{other.leave_type}}
+ {% endfor %}
+
+Please click on the link below to confirm your registration:
+
+Approve: http://{{ domain }}{% url 'leave:status' status=Approved approve_by=approve_by uidb64=uidb64 lidb64=lidb64 token=token %}
+
+Decline: http://{{ domain }}{% url 'leave:status' status=Declined approve_by=approve_by uidb64=uidb64 lidb64=lidb64 token=token %}
+{% endautoescape %}

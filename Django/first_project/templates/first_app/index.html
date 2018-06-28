@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>First App</title>
+    <link rel="stylesheet" href="{%static 'css/mystyle.css'%}"/>
+  </head>
+  <body>
+    <h1>Hello sathish, this is templates/first_app/index.html!</h1>
+    <!-- <img src="{%static 'images/django-test-image.jpg'%}" alt=""/> -->
+    {% if accessrecords %}
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Date</th>
+        </thead>
+        <tbody>
+        {% for access in accessrecords %}
+          <tr>
+              <td>{{ access.name}}</td>
+              <td>{{ access.date}}</td>
+        {% endfor %}
+    {% else %}
+      <td>No data!</td>
+    </tr>
+  </tbody>
+  </table>
+    {% endif %}
+
+
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+{% if registered %}
+   <h1>Your request has been submitted</h1>
+{% else %}
+  <h1>For signup</h1>
+{% endif %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_form form2 %}
+    <input type="submit" value="Submit">
+
+  </form>
+{% endblock %}

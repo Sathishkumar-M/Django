@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+  <h1>For Employee List</h1>
+  <div class="">
+    <a href="{% url 'employee:registration'%}">Add Employee</a>
+  </div>
+
+  {% for employee in employee_list %}
+    {% include 'employee/_employee_list.html' %}
+  {% endfor %}
+{% endblock %}

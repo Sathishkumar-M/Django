@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+  <h1>Leave Rules</h1>
+  <div class="">
+    <a href="{% url 'leave:create'%}">Add Rules</a>
+  </div>
+
+  {% for leave in leaverules_list %}
+  <div class="">
+    <div class="">
+      <h2><strong>{{leave.leave_type}}</strong></h2>
+      <h3><strong>{{leave.leave_rules}}</strong></h3>
+
+      <div class="">
+        {% if user.is_superuser %}
+          <a href="{% url 'leave:update' pk=leave.pk %}"> Edit</a>
+          <a href="{% url 'leave:delete' pk=leave.pk %}">delete</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+{% endblock %}

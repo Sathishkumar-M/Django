@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+  <h1>Leave List: Applied</h1>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Start date</th>
+        <th scope="col">End date</th>
+        <th scope="col">Leave type</th>
+        <th scope="col">Notes</th>
+        {% if user.is_superuser %}
+          <th scope="col">Action</th>
+        {% endif %}
+      </tr>
+    </thead>
+
+  {% for leave in leaveapply_list %}
+    <tr>
+      <td><strong>{{leave.start_date}}</strong></td>
+      <td><strong>{{leave.end_date}}</strong></td>
+      <td><strong>{{leave.leave_type}}</strong></td>
+      <td><strong>{{leave.notes}}</strong></td>
+        {% if user.is_superuser %}
+          <td><select class="status" name="status">
+            {% with 'Awaiting Approved Declined' as list %}
+            {% for status in list.split %}
+              {% if status in leave.status %}
+                <option value="{{status}},{{leave.pk}},{{leave.user.pk}}" selected>{{status}}</option>
+              {% else %}
+                <option value="{{status}},{{leave.pk}},{{leave.user.pk}}">{{status}}</option>
+              {% endif %}
+            {% endfor %}
+            {% endwith %}
+
+            </select>
+          </td>
+        {% endif %}
+    </tr>
+  {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}
+
+
+{% block javascript %}
+  <script>
+  var flag = 0;
+$('select').on('change', function() {
+
+    var approved_email = "{{user.email}}";
+
+      $.ajax({
+        url: '/leave/ajax/leave_status/',
+        data: {
+          'data': $(this).val(),
+          'approved_email': approved_email
+        },
+        async:false,
+        dataType: 'json',
+        success: function (data) {
+
+        }
+      });
+  })
+  </script>
+{% endblock %}

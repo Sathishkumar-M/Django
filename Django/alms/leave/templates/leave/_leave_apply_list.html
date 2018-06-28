@@ -1,0 +1,9 @@
+
+    <td><strong>{{leave.start_date}}</strong></td>
+    <td><strong>{{leave.end_date}}</strong></td>
+    <td><strong>{{leave.leave_type}}</strong></td>
+    <td><strong>{{leave.notes}}</strong></td>
+      {% if user.is_authenticated and leave.user == user %}
+        <td><a href="{% url 'leave:apply_update' pk=leave.pk %}"> Edit</a>
+          <a href="{% url 'leave:apply_delete' pk=leave.pk %}">delete</a></td>
+      {% endif %}

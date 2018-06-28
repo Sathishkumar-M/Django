@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% block body_block %}
+  <h2>For list random users</h2>
+  <table>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Joined date</th>
+    <tbody>
+      {% for user in user_list %}
+        <tr>
+          <td><strong>{{user.username}}</strong></td>
+          <td>{{user.email}}</td>
+          <td>{{user.date_joined}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+{% endblock %}
